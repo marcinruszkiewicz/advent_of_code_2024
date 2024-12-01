@@ -27,3 +27,4 @@ advent_of_code_2024-*.tar
 
 config/secrets.exs
 priv/*
+!priv/.keep
