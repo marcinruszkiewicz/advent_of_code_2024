@@ -1,11 +1,13 @@
 defmodule AdventOfCode.Day06 do
+  alias AdventOfCode.Utils.Board
+
   def part1(filename \\ "priv/day_06.txt") do
     {board, max_x, max_y} = prepare_data(filename)
 
     {board, history} = move_until(true, [], {board, max_x, max_y})
 
     IO.inspect(history)
-    # print(board, max_x, max_y)
+    # Board.print(board, max_x, max_y)
 
     board |> Enum.filter(fn {_, val} -> val in ["X", "|", "-", "+"] end) |> Enum.count()
   end
@@ -13,10 +15,10 @@ defmodule AdventOfCode.Day06 do
   def part2(filename \\ "priv/day_06.txt") do
     {board, max_x, max_y} = prepare_data(filename)
 
-    {board, history} = move_until(true, [], {board, max_x, max_y})
+    {board, _history} = move_until(true, [], {board, max_x, max_y})
 
     # IO.inspect(history)
-    print(board, max_x, max_y)
+    Board.print(board, max_x, max_y)
   end
 
   defp move_until(nil, history, {board, _max_x, _max_y}), do: {board, history}
@@ -36,7 +38,7 @@ defmodule AdventOfCode.Day06 do
           board
       end
 
-    # print(board, max_x, max_y)
+    # Board.print(board, max_x, max_y)
 
     move_until(moved, [moved | history], {board, max_x, max_y})
   end
@@ -202,16 +204,6 @@ defmodule AdventOfCode.Day06 do
             |> Map.replace({x - 1, y}, "<")
         end
     end
-  end
-
-  defp print(board, max_x, max_y) do
-    Enum.each(0..max_y, fn y ->
-      Enum.each(0..max_x, fn x ->
-        IO.write(Map.get(board, {x, y}))
-      end)
-
-      IO.puts("")
-    end)
   end
 
   defp prepare_data(filename) do
