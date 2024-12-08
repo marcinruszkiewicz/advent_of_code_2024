@@ -8,6 +8,6 @@ defmodule Day06Test do
   end
 
   test "runs the solver for part two" do
-    assert Day06.part2("test/examples/day_06.txt") == 4
+    assert Day06.part2("test/examples/day_06.txt") == 6
   end
 end
